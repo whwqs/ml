@@ -1,27 +1,31 @@
+from datetime import *
+
+
 def 通用装饰(被装饰函数):
-    def 闭包函数(*args,**dicargs):
-        print("begin")
-        被装饰函数(*args,**dicargs)
-        print("end")
+    def 闭包函数(*args, **kwargs):
+        print("begin at "+str(time()))
+        print()
+        被装饰函数(*args, **kwargs)
+        print()
+        print("end at "+str(time()))
     return 闭包函数
+
 
 class c1(object):
     def __init__(self):
-        self.x = 9
-    
-    def func1(self,name):
-        print(name)
+        self.name = "my name is c1obj"
+
+    @通用装饰
+    def 报名(self):
+        print(self.name)
 
 
+@通用装饰
+def f1(name):
+    print(name)
 
-@通用装饰 
-def f1(arr,a=900):
-    print(arr[1])
-    print(a)
 
-f1("345",a=390)
+f1("全局函数")
 
-def x1(*args,**dicargs):
-    print(args[0],dicargs["x"])
+c1().报名()
 
-x1("100",x=345)
